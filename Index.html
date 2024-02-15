@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Website</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+
+<body>
+    <header>
+        <a href="#" class="logo">Star Blog</a>
+        <div class="menuToggle"></div>
+    </header>
+    <ul class="navigation">
+        <li><a href="#home" onclick="toggleMenuBtn();">Home</a></li>
+        <li><a href="#about" onclick="toggleMenuBtn();">About</a></li>
+        <li><a href="#post" onclick="toggleMenuBtn();">Post</a></li>
+        <li><a href="#contact" onclick="toggleMenuBtn();">Contact</a></li>
+        <li><a href="signUp.html">Login/Sign-up</a></li>
+    </ul>
+    
+
+
+    <!--banner-->
+    <section class="banner" id="home">
+        <img src="pic9.webp" class="cover">
+        <div class="contentBx">
+            <h2>The Soul Of The World</h2>
+            <h4>A simple Blog Website</h4>
+            <a href="#about" class="btn">About Us</a>
+        </div>
+    </section>
+
+    <!-- ABOUT  -->
+    <section class="about" id="about">
+
+        <div class="title">
+            <h2>About Us</h2>
+        </div>
+        <div class="contentBx">
+            <div class="content">
+                <p>To be honest with you: my passion for travel came out of the blue during my teenage years.
+                    <br>
+
+                    I’ve always traveled a bit around India with my family when I was a child. I enjoyed it but I always
+                    looked at those trips like basic holidays, like the one everyone does to escape from their boring
+                    life so I always had a very distort vision on how traveling really looks like. In fact, as a teen, I
+                    always looked at journeys simply as a way to relax and switch off.
+
+                    However, there’s been a moment in my life where I finally opened my eyes.
+                    <br>
+
+                    The turning point came in 2022 when I decided to take my very first solo trip. The idea of leaving
+                    alone really came out of nowhere but, since that at that time I was really shy I felt the need to
+                    boost my life and so I thought that doing something that was frightening me it might really shake me
+                    up.
+
+                    It really did.
+
+                    From that point on my love for journeys just grew exponentially, every adventure and every day more
+                    and more. And my mind also started changing.
+                    <br>
+
+                    By travelling I discovered I don’t want to live a life I don’t enjoy and just escaping it doing some
+                    small holidays every so often. Rather, I want my everyday life to be majestic, and I’m trying hard
+                    for it.
+                </p>
+                <br>
+                <p>
+                    In the 2010 I was lucky enough to enjoy long haul holidays and had some great experiences, not
+                    least
+                    having a birthday cake with candles presented to me in a Club .
+
+                    I was also a member of the British Airways Junior Jet Club, which not only kept kids entertained on
+                    flights but also arranged lots of activities and trips in the UK too.
+
+                    My first job involved working for a Danish company which meant there were lots of trips across to
+                    the
+                    factory in Denmark including driving across to Denmark when I was 17.
+
+                    Later I moved into travel full time thanks to my first partner who was a coach driver and introduced
+                    me
+                    to the life, and it’s something I have done ever sense.
+
+                    Travel really is my passion and I now enjoy solo travel. My bucket list is ever expanding!
+                </p>
+
+            </div>
+            <div class="content">
+                <div class="imgBx">
+                    <img src="pic3.jpg" class="cover">
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+
+    <section id="postUpdateSection">
+        <div id="openPost">
+            <div class="openImg"></div>
+            <div class="openText">
+                <h5 id="openDate"></h5>
+                <label for="openTitle">Title</label>
+                <h3 id="openTitle"></h3>
+                <label for="openDes">Description</label>
+                <p id="openDes"></p>
+            </div>
+        </div>
+        <div id="editBox" style="padding: 2%;">
+            <!-- <i class="fa-duotone fa-ellipsis-vertical" style="font-size: 16px;"></i> -->
+            <button style="font-size: 20px; border: 0px; background-color: white;"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+            <div id="popDots">
+                <p id="edit">Edit</p>
+                <p id="delete">Delete</p>
+            </div>
+        </div>
+        
+        <!-- <div id="postUpdate">
+            <div>Edit</div>
+            <div>Delete</div>
+        </div> -->
+    </section>
+
+    <!-- Latest Blog Post -->
+    <section class="post" id="post">
+        <div class="title">
+            <h2>Latest Post </h2>
+            <h3>
+                <p><b>Say yes, take risks, and live life on your own terms.....</b></p>
+            </h3>
+        </div>
+        <div class="contentBx">
+            <div class="postColumn">
+            </div>
+        </div>
+        <div class="title">
+            <a href="#" class="btn mgt60">Load More</a>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <div class="title">
+            <h2>Get In Touch </h2>
+            <p><b>PLease Get In Touch And Our Expert Support Team Will Answer All Your Queries</b> </p>
+        </div>
+        <div class="contactForm">
+            <div class="row">
+                <input type="text" name="" placeholder="First Name">
+                <input type="text" name="" placeholder="Last Name">
+
+            </div>
+            <div class="row">
+                <input type="text" name="" placeholder="Email Address">
+                <input type="text" name="" placeholder="Mobile No.">
+
+            </div>
+            <div class="row2">
+                <textarea placeholder="Message"></textarea>
+            </div>
+            <div class="row2">
+                <input type="Submit" value="Send" class="btn">
+            </div>
+            <!--  <p>
+            <label for="request">Any Request</label>
+            <br>
+            <textarea id="request" rows="10" cols="40" name="request" placeholder="Type your request here"></textarea>
+        </p> -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+
+    <footer>
+        <a href="#" class="logo">My Blog</a>
+        <ul class="footerMenu">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#post">Post</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+
+        </ul>
+    </footer>
+
+</body>
+</html>
+<script src="index.js"></script>
+<script src="https://kit.fontawesome.com/9018df668b.js" crossorigin="anonymous"></script>

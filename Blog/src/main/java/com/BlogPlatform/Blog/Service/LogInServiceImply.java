@@ -39,7 +39,7 @@ public class LogInServiceImply implements LogInService{
         else if (userWithPhone.isPresent()){
             if (dto.getPassword().equals(userWithPhone.get().getPassword())){
                 User user= userWithPhone.get();
-                Optional<UserSession> checkAlreadyIn= rDao.findById(user.getUserId());
+                Optional<UserSession> checkAlreadyIn= rDao.findByUserId(user.getMobile());
 
                 if(checkAlreadyIn.isPresent()) {
                     throw new LogInException("Already Login");
@@ -57,7 +57,7 @@ public class LogInServiceImply implements LogInService{
                 throw new UserException("Incorrect Password");
             }else {
                 User user= userWithEmail.get();
-                Optional<UserSession> checkAlreadyIn= rDao.findById(user.getUserId());
+                Optional<UserSession> checkAlreadyIn= rDao.findByUserId(user.getEmail());
                 if(checkAlreadyIn.isPresent()) {
                     throw new LogInException("Already Login");
                 }else{

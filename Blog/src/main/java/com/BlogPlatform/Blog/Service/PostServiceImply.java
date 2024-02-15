@@ -22,9 +22,9 @@ public class PostServiceImply implements PostService{
 
     @Override
     public Post createPost(Post post) throws PostException {
-        User user = ur.findById(post.getUserId().getUserId())
-                .orElseThrow(() -> new PostException("(︺︹︶) No user their with "+ post.getUserId().getUserId()+" (︺︹︶)"));
-        post.setUserId(user);
+        User user = ur.findById(post.getUser().getUserId())
+                .orElseThrow(() -> new PostException("(︺︹︶) No user their with "+ post.getUser().getUserId()+" (︺︹︶)"));
+        post.setUser(user);
         post.setCreated_at(LocalDateTime.now());
         return pr.save(post);
     }
@@ -33,6 +33,10 @@ public class PostServiceImply implements PostService{
     public Post getPost(int id) throws PostException {
         return pr.findById(id)
                 .orElseThrow(() -> new PostException("(︺︹︶) No Post their with "+ id+" (︺︹︶)"));
+    }
+    @Override
+    public List<Post> getAllPost() {
+        return pr.findAllPost();
     }
 
     @Override

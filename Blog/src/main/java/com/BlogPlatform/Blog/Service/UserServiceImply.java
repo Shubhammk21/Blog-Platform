@@ -38,10 +38,10 @@ public class UserServiceImply implements UserService{
         User user = ur.findById(id)
                 .orElseThrow(() -> new UserException("(︺︹︶) No user their with "+ id+" (︺︹︶)"));
 
-        user.setName(updatedUser.getName());
-        user.setBioString(updatedUser.getBioString());
+        //user.setName(updatedUser.getName());
+        //user.setBioString(updatedUser.getBioString());
 
-        return ur.save(user);
+        return ur.save(updatedUser);
     }
 
     @Override

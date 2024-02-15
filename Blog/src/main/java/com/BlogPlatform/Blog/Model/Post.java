@@ -3,6 +3,9 @@ package com.BlogPlatform.Blog.Model;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.links.Link;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,9 +32,12 @@ public class Post {
     @Size(min = 2 ,message = "title character should be greater than 2")
     private String title;
 
+    @Lob
     @Size(min = 10 ,message = "description character should be greater than 10")
     private String description;
 
+    @Lob
+    private String img;
 
     @CreationTimestamp
     //	(timestamp, automatically set when the post is created)
@@ -42,13 +48,14 @@ public class Post {
     private LocalDateTime updated_at;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Comment> comments= new ArrayList<>();
 
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId",nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "userId")
     // (foreign key referencing the User model)
-    private User userId;
+    private User user;
 
     //	(integer, non-negative)
     private int likes;

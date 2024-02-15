@@ -12,4 +12,8 @@ public interface PostRepo extends JpaRepository<Post, Integer> {
 
     @Query("Select p from Post p")
     public List<Post> findTop5Likes();
+
+    @Query("Select p from Post p")
+    public List<Post> findAllPost();
+
 }

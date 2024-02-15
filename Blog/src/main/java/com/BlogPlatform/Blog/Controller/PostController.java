@@ -40,6 +40,12 @@ public class PostController {
         return new ResponseEntity<Post>(ps.deletePost(id), HttpStatus.OK);
     }
 
+    @GetMapping("/posts/All")
+    public ResponseEntity<List<Post>> getAllPost(){
+
+        return new ResponseEntity<List<Post>>(ps.getAllPost(), HttpStatus.OK);
+    }
+
     @PostMapping("/posts/{id}/like")
     public ResponseEntity<Integer> likePost(@PathVariable("id") Integer id) throws PostException {
 
@@ -63,4 +69,5 @@ public class PostController {
 
         return new ResponseEntity<List<Post>>(ps.mostLikedPosts(), HttpStatus.OK);
     }
+
 }

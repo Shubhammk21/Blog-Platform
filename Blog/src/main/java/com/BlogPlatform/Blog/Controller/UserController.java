@@ -17,7 +17,7 @@ public class UserController {
     @Autowired
     private UserService us;
 
-    @PostMapping("/Users")
+    @PostMapping("/Users/signUp")
     public ResponseEntity<User> createUser(@Valid @RequestBody User user) throws UserException {
 
         return new ResponseEntity<User>(us.createUser(user), HttpStatus.CREATED);

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="AddPost.css">
+</head>
+<body>
+    <div>
+        <div id="newPost">
+            <h2 style="text-align: center;">CREATE NEW POST</h2>
+        </div>
+        <form id="postFrom" style="display: block;">
+
+            <div class="ma_2_row">
+                <div class="ma_2_colums">
+                    <input type="text" class="_1w3ZZo _2mFmU7" name="title" required="" autocomplete="title" tabindex="1" value="" fdprocessedid="oqysdc">
+                    <label for="title" class="_1osQq7">Title</label>
+                </div>
+            </div>
+
+            <div class="ma_2_colums">
+                <textarea class="description" name="description" rows="4" cols="10" tabindex="5" required="" autocomplete="street-address"></textarea>
+                <label for="areaAndStreet">description</label>
+            </div>
+
+            <div class="ma_2_row">
+                <div class="ma_2_colums">
+                    <input type="text" class="_1w3ZZo _2mFmU7" name="link" required="" autocomplete="link" tabindex="1" value="" fdprocessedid="oqysdc">
+                    <label for="link" class="_1osQq7">Link of Image</label>
+                </div>
+            </div>
+
+            <div class="ma_2_row">
+                <div>
+                    <p class=ma_addressType">Comment</p>
+                    <div class="ma_hw">
+                        <label for="onn">
+                            <input type="radio" class="_3DAmyP" name="locationTypeTag" readonly="" id="onn" value="onn">
+                            <div class="_2jIO64">
+                                <span>ONN</span>
+                            </div>
+                        </label>
+                        <label for="off">
+                            <input type="radio" class="_3DAmyP" name="locationTypeTag" readonly="" id="off" value="off">
+                            <div class="_2jIO64">
+                                <span>OFF</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="ma_save_cancel">
+                <button id="button-maSave" onclick="Posting()">Post</button>
+                <button id="button-maCancel" onclick=`Goto(window.location.href='index.html')`>Cancel</button>
+            </div>
+        </form>
+        <div id="AddressList"></div>
+    </div>
+</body>
+</html>
+<script src="index.js"></script>

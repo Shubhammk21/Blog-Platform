@@ -14,6 +14,8 @@ public interface PostService {
     public int decrementLike(int post_id) throws PostException;
     public long totalNumberOfPosts();
     public List<Post> mostLikedPosts();
+
+    public List<Post> getAllPost();
 }
 //POST /posts: Create a new post. The request should include the user_id.
 //GET /posts/{id}: Retrieve a post by id.
