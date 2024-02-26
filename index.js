@@ -1,26 +1,4 @@
 
-async function Post(obj){
-    try{
-        let res=await fetch("http://localhost:8888/posts",{ //this api put login data to database
-            method:'POST',
-            headers:{
-                "Content-Type":"application/json"
-            },
-            body: JSON.stringify(obj)
-        });
-            let data= await  res.json();
-            //console.log(data);
-            if(data.message!=undefined){
-                alert(data.message);
-            }else{
-                alert("Sign Up Successfull!!!");
-                return data;
-            }
-    }catch(err){
-        console.log(err);
-    }
-}
-
 async function GetPost(id){
     try{
         let res=await fetch(`http://localhost:8888/posts/${id}`) //this api put login data to database
@@ -118,22 +96,6 @@ function toggleMenuBtn() {
 
 }
 
-function Posting(){
-    event.preventDefault();
-
-    let form= document.querySelector("form");
-    let obj= {
-                    "description": form.description.value,
-                    "img": form.link.value,
-                    "title": form.title.value,
-                    "userId": {
-                        "userId": 5
-                      }
-                }
-
-    Post(obj);
-    console.log(obj);
-}
 
 function display(data){
     let main= document.querySelector(".postColumn");
@@ -175,10 +137,19 @@ function display(data){
 }
 
 function OpenPost(data){
-    let box= document.querySelector("#openPost");
-    // box.style.opacity= "0.9";
-    // box.style.visibility= "visible";
+    let box= document.querySelector("#postUpdateSection");
+
+    box.style.opacity= "0.9";
+    box.style.visibility= "visible";
     console.log(data.postId);
+    let body= document.querySelectorAll("section");
+    for(let i=0; i<body.length; i++){
+        if(i==2){
+            continue;
+        }
+        body[i].style.filter="blur(2px)";
+        body[i].style.webkitFilter= "blur(2px)";
+    }
     // let mdiv= document.createElement("div");
     // mdiv.setAttribute("class", "mOpenPost");
     // let popDots= document.createElement("div");

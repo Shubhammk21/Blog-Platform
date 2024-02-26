@@ -54,7 +54,7 @@ document.querySelector("#button-56").addEventListener("click",function(event){
 
 document.getElementById("loginfun").addEventListener("click",function(event){
 
-     event.preventDefault();
+     //event.preventDefault();
      let log= document.getElementById("login");
      log.style.display="block";
      
