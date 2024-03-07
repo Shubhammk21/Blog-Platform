@@ -12,7 +12,7 @@ async function Post(obj){
             if(data.message!=undefined){
                 alert(data.message);
             }else{
-                alert("Sign Up Successfull!!!");
+                alert("Post posted Successfuly!!!");
                 return data;
             }
     }catch(err){
@@ -27,7 +27,7 @@ function Posting(){
                     "description": form.description.value,
                     "img": form.link.value,
                     "title": form.title.value,
-                    "userId": {
+                    "user": {
                         "userId": 1
                       }
                 }

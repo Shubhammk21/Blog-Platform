@@ -27,30 +27,22 @@ async function GetPostAll(){
     }
 }
 
-async function UpdatePost(id){
+async function UpdatePostApi(id,obj){
     try{
         let res=await fetch(`http://localhost:8888/posts/${id}`,{ //this api put login data to database
             method: 'PUT',
             headers:{
                 "Content-Type":"application/json"
             },
-            body: JSON.stringify({
-                'dob':  dob.value,
-                'firstName': fname.value,
-                'gender': gender.value,
-                'emai': email.value ,
-                'mobile': mobile.value,
-                'lastName' : lname.value,
-                'password' : pass.value
-            })
+            body: JSON.stringify(obj)
         });
             let data= await  res.json();
             //console.log(data);
             if(data.message!=undefined){
                 alert(data.message);
             }else{
-                alert("Sign Up Successfull!!!");
-                return data;
+                alert("Update Successfull!!!");
+                location.reload();
             }
     }catch(err){
         console.log(err);
@@ -122,12 +114,15 @@ function display(data){
         let a= document.createElement("a");
         a.setAttribute("class", "btn");
         a.innerHTML= "Read More";
+        a.href="#postUpdateSection";
         a.onclick=()=>{
             let box= document.querySelector("#openPost");
             // box.style.opacity= "0";
             // box.style.visibility= "hidden";
             GetPost(i.postId);
         }
+
+        //let like= document.createElement("button");
 
         div2.append(h3,a);
 
@@ -147,8 +142,8 @@ function OpenPost(data){
         if(i==2){
             continue;
         }
-        body[i].style.filter="blur(2px)";
-        body[i].style.webkitFilter= "blur(2px)";
+        body[i].style.filter="blur(3px)";
+        body[i].style.webkitFilter= "blur(3px)";
     }
     // let mdiv= document.createElement("div");
     // mdiv.setAttribute("class", "mOpenPost");
@@ -160,11 +155,9 @@ function OpenPost(data){
         DeletePostApi(data.postId);
         console.log("woeking")
     };
-
-    let div1= document.querySelector(".openImg");
-    let img= document.createElement("img");
+   
+    let img= document.querySelector(".openImg>img");
     img.src= data.img;
-    div1.append(img);
 
     let h3= document.getElementById("openTitle");
     h3.innerHTML= data.title;
@@ -175,25 +168,77 @@ function OpenPost(data){
     let h4= document.getElementById("openDate");
     h4.innerHTML=  "Date -: "+data.created_at[2]+"/"+data.created_at[1]+"/"+data.created_at[0];
 
+    let editPop= document.querySelector("#edit");
+    editPop.onclick=(event)=>{// this help to delete the address
+        console.log("woeking");
+
+        p.setAttribute("contenteditable",true);
+        h3.setAttribute("contenteditable",true);
+
+        let imgMover= document.getElementById("removeImg");
+        imgMover.style.display="block"
+
+        let saveDiv= document.querySelector("#postUpdate");
+        saveDiv.style.display="flex"
+
+        imgMover.onclick=()=>{
+            img.src="";
+            imgMover.innerHTML=`<i class="fa-solid fa-upload"></i>`+"  Save";
+
+            let newImage= document.getElementById("newImage");
+            newImage.style.display="block"
+            newImage.setAttribute("required", true)
+
+            imgMover.onclick=()=>{
+                img.src= newImage.value;
+            }
+        }
+        document.getElementById("puSave").onclick=()=>{
+
+            p.setAttribute("contenteditable",false);
+            h3.setAttribute("contenteditable",false);
+
+            updatePost(data.postId, img.src, h3.innerText , p.innerText);
+        }
+
+        document.getElementById("puCancel").onclick=()=>{
+
+            p.setAttribute("contenteditable",false);
+            h3.setAttribute("contenteditable",false);
+
+            img.src= data.img;
+            p.innerHTML= data.description;
+            h3.innerHTML= data.title;
+
+            imgMover.style.display="none";
+            saveDiv.style.display="none";
+            newImage.style.display="none";
+            
+        }
+
+    };
 }
 
-function DeletePost(){
-     // let editPop= document.createElement("p");
-     // editPop.innerText= "Edit";
-     // editPop.addEventListener("click", function(){
-     //     let form= document.querySelector("#addressFrom")
-
-    //     form.style.display="block";
-    //     form.style.marginTop= "2%"
-    //     let edit_div_hide=document.querySelectorAll(".addressBolckManager")
-    //     edit_div_hide[index].style.display= "none"; // this will hide the current edit block
-    // })
-
-    // let deletePop= document.createElement("p");
-    // deletePop.innerText= "Delete";
-    // deletePop.onclick=(event)=>{// this help to delete the address
-    //DeletePost(i.addressId, index);
-    //  };
+function updatePost(postId, img, title, des){
+     let obj= {"description": des,
+                    "img": img,
+                    "title": title,}
+    //console.log(obj);
+    UpdatePostApi(postId,obj);
 }
 
+document.getElementById("cancelPost").onclick=()=>{
+    let box= document.querySelector("#postUpdateSection");
+
+    box.style.opacity= "0";
+    box.style.visibility= "hidden";
+    let body= document.querySelectorAll("section");
+    for(let i=0; i<body.length; i++){
+        if(i==2){
+            continue;
+        }
+        body[i].style.filter="none";
+        body[i].style.webkitFilter= "none";
+    }
+}
 

@@ -45,6 +45,8 @@ public class User {
 
     private Gender gender;
 
+    public boolean isAdministrator;
+
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     // (foreign key referencing the User model)

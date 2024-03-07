@@ -105,13 +105,22 @@
             <input id="chbx" type="checkbox">
         </div>
         <div id="openPost">
-            <div class="openImg"></div>
+            <div class="openImg">
+                <img src="" alt="">
+                <button id="removeImg"><i class="fa-solid fa-trash-can-arrow-up"></i> Upload new Image</button>
+                <input type="url" id="newImage">
+            </div>
             <div class="openText">
                 <h5 id="openDate"></h5>
                 <label for="openTitle">Title</label>
-                <h3 id="openTitle"></h3>
+                <h4 id="openTitle"></h4>
                 <label for="openDes">Description</label>
+                <!-- <input type="text" id="" readonly> -->
                 <p id="openDes"></p>
+                <div id="postUpdate">
+                    <button id="puCancel">Cancel</button>
+                    <button id="puSave">Save</button>
+                </div>
             </div>
         </div>
         <div id="editBox" style="padding: 2%;">
@@ -122,11 +131,6 @@
                 <p id="delete">Delete</p>
             </div>
         </div>
-        
-        <!-- <div id="postUpdate">
-            <div>Edit</div>
-            <div>Delete</div>
-        </div> -->
     </section>
 
     <!-- Latest Blog Post -->

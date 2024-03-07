@@ -1,5 +1,6 @@
 package com.BlogPlatform.Blog.Controller;
 
+import com.BlogPlatform.Blog.Exception.LogInException;
 import com.BlogPlatform.Blog.Exception.UserException;
 import com.BlogPlatform.Blog.Model.User;
 import com.BlogPlatform.Blog.Service.UserService;
@@ -42,10 +43,10 @@ public class UserController {
 
     }
 
-    @GetMapping("/analytics/users")
-    public ResponseEntity<Long> getTotalUsers() {
+    @GetMapping("/analytics/users/{adminKey}")
+    public ResponseEntity<Long> getTotalUsers(@PathVariable String adminKey) throws LogInException {
 
-        return new ResponseEntity<Long>(us.getTotalUsers(), HttpStatus.OK);
+        return new ResponseEntity<Long>(us.getTotalUsers(adminKey), HttpStatus.OK);
     }
 
     @GetMapping("/analytics/users/top-active")

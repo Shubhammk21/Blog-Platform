@@ -437,13 +437,17 @@ footer .footerMenu li a {
     top: 0; 
     visibility: hidden;
 }
+#cancelPost:hover{
+    background: rgb(88, 194, 75);
+    transition: 500ms;
+}
 
 #postUpdateSection{
    width: 60%;
    margin: auto;
    display: flex;
-   position: fixed;
-   z-index: 1;
+   position: absolute;
+   z-index: 100;
    left: 20%;
    top: 10%;
    height: auto;
@@ -452,22 +456,64 @@ footer .footerMenu li a {
 }
 
 #openPost{
-    width: 90%;
-    /* height: 600px; */
-    /* margin: auto; */
-    /* border: 1px solid; */
+    width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    padding: 5%;
+
+}
+#openPost>div{
+    width: 48%;
+    justify-content: space-between;
+    align-items: center;
+
 }
 #openPost>div>img{
-    width: 50%;
-    display: block;
+    width: 100%;
+    /* display: block; */
     border: 1px solid rgb(207, 205, 200);
 }
+
+#removeImg{
+    display: none;
+    position: absolute;
+    z-index: 10000;
+    /* width: 100px; */
+    padding: 2% 1%;
+    top: 50%;
+    right: 60%;
+    font-weight: 600;
+    color: white;
+    font-size: 16px;
+    background-color: rgba(51, 61, 60, 0.333);
+}
+
+#newImage{
+    display: none;
+    position: absolute;
+    z-index: 10000;
+    /* width: 100px; */
+    padding: 1% .5%;
+    top: 60%;
+    right: 60%;
+    font-weight: 600;
+    color: white;
+    font-size: 12px;
+    background-color: rgba(51, 61, 60, 0.333);
+}
+
+#removeImg:hover{
+    background-color: rgb(88, 194, 75, 0.555); ;
+}
+
+#openPost h4,#openPost p{
+    font-size: 13px;
+}
+
 #openDate{
-    margin: 0% 0% 60% 20% ;
+    position: absolute;
+    top: 8%;
+    /* margin: 0% 0% 60% 20% ; */
 }
 
 #openPost label {
@@ -476,31 +522,57 @@ footer .footerMenu li a {
     margin-top: 15px;
    
 }
+
 #postUpdate{
-    position: relative;  
+    justify-content: space-around;
+    align-items: center;
+    margin: auto;
+    margin-top: 50px;
+    display: none;
 }
+
+#postUpdate>button{
+    display: inline-block;
+    padding: 8px 20px;
+    margin-top: 20px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: 0.25s;     
+}
+#postUpdate>button:hover{
+    background-color: rgb(88, 194, 75); 
+    color: white;
+    transition: 500ms;
+}
+
 #popDots{
     /* border: 1px solid; */
     position: absolute;
     /* top: 0; */margin-top: -40px;
     right: 50%;
+    visibility: hidden;
     opacity: 0;
     /* transform: rotateY(-90); */
     width: 100px;
     /* pointer-events:; */
     background-color: white;
+
 }
 #popDots>p{
     font-weight: 500;
     padding: 10% 30%;
 }
+
 #editBox{
-    display: flex;
-    justify-content: space-between;
+    height: 40px;
 }
 #editBox:hover #popDots{
     opacity: 1;
     right: 10%;
+    visibility: visible;
     /* transform: rotateY(90); */
     transition: 1000ms;
 }
