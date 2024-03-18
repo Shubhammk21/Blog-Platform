@@ -7,23 +7,23 @@ async function signUp(fname,lname,mobile,email,pass,dob,gender){
                 "Content-Type":"application/json"
             },
             body: JSON.stringify({
-                'dob':  dob.value,
-                'firstName': fname.value,
+                'dob':  dob,
+                'firstName': fname,
                 'gender': gender,
-                'emai': email.value ,
-                'mobile': mobile.value,
-                'lastName' : lname.value,
-                'password' : pass.value
+                'email': email ,
+                'mobile': mobile,
+                'lastName' : lname,
+                'password' : pass
             })
         });
             let data= await  res.json();
-            //console.log(data);
+            console.log(data);
             if(data.message!=undefined){
                 alert(data.message);
             }else{
                 alert("Sign Up Successfull!!!");
-                localStorage.setItem(data.fname,JSON.stringify(data));
-
+                localStorage.removeItem("blogToken");
+                localStorage.setItem("blogToken",JSON.stringify(data));
             }
     }catch(err){
         console.log(err);
@@ -37,7 +37,7 @@ document.querySelector("#button-56").addEventListener("click",function(event){
     let lname= document.getElementById("lname").value;
     let email= document.getElementById("email").value;
     let mobile= document.getElementById("phone").value;
-    let pass= document.getElementById("password").value;
+    let pass= document.getElementById("sPassword").value;
     let dob= document.getElementById("dob").value;
     var gender;
     let gendata= document.getElementsByName("insex");
@@ -48,18 +48,18 @@ document.querySelector("#button-56").addEventListener("click",function(event){
     }
     //let profiledat = signUp(fname,lname,mobile,email,pass,dob,gender);
     
-    console.log(fname,lname,mobile,email,pass,dob,gender);
+    //console.log(pass);
     signUp(fname,lname,mobile,email,pass,dob,gender)
 });
 
 document.getElementById("loginfun").addEventListener("click",function(event){
 
-     //event.preventDefault();
+     event.preventDefault();
      let log= document.getElementById("login");
      log.style.display="block";
      
      let sign= document.getElementById("signup");
  
-     sign.style.display= "none"
+     sign.style.display= "none";
  
  });

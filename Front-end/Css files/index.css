@@ -250,16 +250,19 @@ p {
 
 }
 .postBox img{
-    width: 100%;
+    width: 80%;
 }
 
 .post .contentBx {
+    
+    margin-top: 20px;
+}
+.postColumn{
     position: relative;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 20px;
     margin-top: 20px;
-
 }
 
 .post .contentBx .postColumn {
@@ -424,6 +427,9 @@ footer .footerMenu li a {
     letter-spacing: 2px;
 
 }
+#liAddPost, #logOut{
+    display: none;
+}
 #cancelPost{
     position: absolute;
     font-size: 40px;
@@ -568,6 +574,7 @@ footer .footerMenu li a {
 
 #editBox{
     height: 40px;
+    display: none;
 }
 #editBox:hover #popDots{
     opacity: 1;

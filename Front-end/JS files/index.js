@@ -1,3 +1,20 @@
+let admin= JSON.parse(localStorage.getItem("blogToken")) || [];
+
+if(admin !=""){
+
+    let sign= document.getElementById("signUp");
+    sign.style.display="none";
+    
+    let logOut= document.getElementById("logOut");
+    logOut.style.display="block";
+
+    if(admin.isAdministrator){
+        let addPost= document.getElementById("liAddPost");
+        addPost.style.display="block";
+    }else{
+        addPost.style.display="none";
+    }
+}
 
 async function GetPost(id){
     try{
@@ -27,9 +44,9 @@ async function GetPostAll(){
     }
 }
 
-async function UpdatePostApi(id,obj){
+async function UpdatePostApi(id, obj, adminKey){
     try{
-        let res=await fetch(`http://localhost:8888/posts/${id}`,{ //this api put login data to database
+        let res=await fetch(`http://localhost:8888/posts/${id}/${adminKey}`,{ //this api put login data to database
             method: 'PUT',
             headers:{
                 "Content-Type":"application/json"
@@ -48,9 +65,9 @@ async function UpdatePostApi(id,obj){
         console.log(err);
     }
 }
-async function DeletePostApi(id){
+async function DeletePostApi(id, adminKey){
     try{
-        let res=await fetch(`http://localhost:8888/posts/${id}`,{ //this api put login data to database
+        let res=await fetch(`http://localhost:8888/posts/${id}/${adminKey}`,{ //this api put login data to database
             method:'DELETE'
         });
             let data= await  res.json();
@@ -63,6 +80,27 @@ async function DeletePostApi(id){
             }
     }catch(err){
         console.log(err);
+    }
+}
+
+async function LogOut(key){
+
+    try {
+
+        let res= await fetch("http://localhost:8888/User/LogOut?key="+key,{
+            method: 'DELETE'
+            // headers:{
+            //     "Content-Type":"application/json"
+            // }
+        });
+        let data= res;
+        if(data !=null){
+            localStorage.removeItem("blogToken");
+            alert(data);
+            window.location.href="index.html";  
+        }
+    } catch (error) {
+        console.log(error)
     }
 }
 
@@ -91,7 +129,7 @@ function toggleMenuBtn() {
 
 function display(data){
     let main= document.querySelector(".postColumn");
-    console.log(data)
+
     data.forEach(i => {
 
         let mdiv= document.createElement("div");
@@ -136,7 +174,7 @@ function OpenPost(data){
 
     box.style.opacity= "0.9";
     box.style.visibility= "visible";
-    console.log(data.postId);
+    // console.log(data.postId);
     let body= document.querySelectorAll("section");
     for(let i=0; i<body.length; i++){
         if(i==2){
@@ -145,17 +183,7 @@ function OpenPost(data){
         body[i].style.filter="blur(3px)";
         body[i].style.webkitFilter= "blur(3px)";
     }
-    // let mdiv= document.createElement("div");
-    // mdiv.setAttribute("class", "mOpenPost");
-    // let popDots= document.createElement("div");
-    // popDots.setAttribute("class", "deleteEditDrop"); 
 
-    let deletePop= document.querySelector("#delete");
-    deletePop.onclick=(event)=>{// this help to delete the address
-        DeletePostApi(data.postId);
-        console.log("woeking")
-    };
-   
     let img= document.querySelector(".openImg>img");
     img.src= data.img;
 
@@ -168,55 +196,68 @@ function OpenPost(data){
     let h4= document.getElementById("openDate");
     h4.innerHTML=  "Date -: "+data.created_at[2]+"/"+data.created_at[1]+"/"+data.created_at[0];
 
-    let editPop= document.querySelector("#edit");
-    editPop.onclick=(event)=>{// this help to delete the address
-        console.log("woeking");
+    if(admin.isAdministrator){
+        document.getElementById("editBox").style.display="block";
 
-        p.setAttribute("contenteditable",true);
-        h3.setAttribute("contenteditable",true);
+        let deletePop= document.querySelector("#delete");
+        deletePop.onclick=(event)=>{// this help to delete the address
+            DeletePostApi(data.postId);
+        };
 
-        let imgMover= document.getElementById("removeImg");
-        imgMover.style.display="block"
+        let editPop= document.querySelector("#edit");
+        editPop.onclick=(event)=>{// this help to delete the address
+            console.log("woeking");
 
-        let saveDiv= document.querySelector("#postUpdate");
-        saveDiv.style.display="flex"
+            p.setAttribute("contenteditable",true);
+            h3.setAttribute("contenteditable",true);
 
-        imgMover.onclick=()=>{
-            img.src="";
-            imgMover.innerHTML=`<i class="fa-solid fa-upload"></i>`+"  Save";
+            let imgMover= document.getElementById("removeImg");
+            imgMover.style.display="block"
 
-            let newImage= document.getElementById("newImage");
-            newImage.style.display="block"
-            newImage.setAttribute("required", true)
+            let saveDiv= document.querySelector("#postUpdate");
+            saveDiv.style.display="flex"
 
             imgMover.onclick=()=>{
-                img.src= newImage.value;
+                img.src="";
+                imgMover.innerHTML=`<i class="fa-solid fa-upload"></i>`+"  Save";
+
+                let newImage= document.getElementById("newImage");
+                newImage.style.display="block"
+                newImage.setAttribute("required", true)
+
+                imgMover.onclick=()=>{
+                    img.src= newImage.value;
+                }
             }
-        }
-        document.getElementById("puSave").onclick=()=>{
+            document.getElementById("puSave").onclick=()=>{
 
-            p.setAttribute("contenteditable",false);
-            h3.setAttribute("contenteditable",false);
+                p.setAttribute("contenteditable",false);
+                h3.setAttribute("contenteditable",false);
 
-            updatePost(data.postId, img.src, h3.innerText , p.innerText);
-        }
+                updatePost(data.postId, img.src, h3.innerText , p.innerText);
+            }
 
-        document.getElementById("puCancel").onclick=()=>{
+            document.getElementById("puCancel").onclick=()=>{
 
-            p.setAttribute("contenteditable",false);
-            h3.setAttribute("contenteditable",false);
+                p.setAttribute("contenteditable",false);
+                h3.setAttribute("contenteditable",false);
 
-            img.src= data.img;
-            p.innerHTML= data.description;
-            h3.innerHTML= data.title;
+                img.src= data.img;
+                p.innerHTML= data.description;
+                h3.innerHTML= data.title;
 
-            imgMover.style.display="none";
-            saveDiv.style.display="none";
-            newImage.style.display="none";
-            
-        }
+                imgMover.style.display="none";
+                saveDiv.style.display="none";
+                newImage.style.display="none";
+                
+            }
+        };
+    }
+    // let mdiv= document.createElement("div");
+    // mdiv.setAttribute("class", "mOpenPost");
+    // let popDots= document.createElement("div");
+    // popDots.setAttribute("class", "deleteEditDrop"); 
 
-    };
 }
 
 function updatePost(postId, img, title, des){
@@ -224,7 +265,7 @@ function updatePost(postId, img, title, des){
                     "img": img,
                     "title": title,}
     //console.log(obj);
-    UpdatePostApi(postId,obj);
+    UpdatePostApi(postId,obj,admin.uuId);
 }
 
 document.getElementById("cancelPost").onclick=()=>{
@@ -240,5 +281,23 @@ document.getElementById("cancelPost").onclick=()=>{
         body[i].style.filter="none";
         body[i].style.webkitFilter= "none";
     }
+}
+
+function systemLogOut(){
+
+    if(confirm("Press a Yes for Confirm !")){
+        let sign= document.getElementById("signUp");
+        sign.style.display="block";
+        
+        let logOut= document.getElementById("logOut");
+        logOut.style.display="none";
+
+        LogOut(admin.uuId);
+    }
+    else{
+        window.location.href="index.html"; 
+    }
+
+
 }
 

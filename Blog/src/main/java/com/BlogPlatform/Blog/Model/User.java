@@ -2,6 +2,8 @@ package com.BlogPlatform.Blog.Model;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.BlogPlatform.Blog.Dto.Gender;
@@ -24,7 +26,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer userId;
     @Size(min = 2 ,message = "name character should be greater than 2")
-    private String fistName;
+    private String firstName;
 
     @Size(min = 2 ,message = "name character should be greater than 2")
     private String lastName;
@@ -38,7 +40,8 @@ public class User {
 
     @Size(min = 1, max = 200, message = "string, 0-200 characters")
     private String bioString;
-
+    @NotNull
+    @NotBlank
     private String password;
 
     private String Dob;
