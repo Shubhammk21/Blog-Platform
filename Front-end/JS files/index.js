@@ -7,12 +7,15 @@ if(admin !=""){
     
     let logOut= document.getElementById("logOut");
     logOut.style.display="block";
+    let addPost= document.getElementById("liAddPost");
+    let ms= document.getElementById("messageSheet");
 
     if(admin.isAdministrator){
-        let addPost= document.getElementById("liAddPost");
+        ms.style.display= "block";
         addPost.style.display="block";
     }else{
         addPost.style.display="none";
+        ms.style.display= "none";
     }
 }
 
@@ -86,7 +89,6 @@ async function DeletePostApi(id, adminKey){
 async function LogOut(key){
 
     try {
-
         let res= await fetch("http://localhost:8888/User/LogOut?key="+key,{
             method: 'DELETE'
             // headers:{
@@ -96,11 +98,29 @@ async function LogOut(key){
         let data= res;
         if(data !=null){
             localStorage.removeItem("blogToken");
-            alert(data);
             window.location.href="index.html";  
         }
     } catch (error) {
         console.log(error)
+    }
+}
+
+async function PostMessage(obj){
+    try{
+        let res=await fetch(`http://localhost:8888/Feedback/hm`,{ //this api put login data to database
+            method:'POST',
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify(obj)
+        });
+            let data= await  res.json();
+            //console.log(data);
+            if(data.message!=undefined){
+                alert("Message send Successfuly!!!");
+            }
+    }catch(err){
+        console.log(err);
     }
 }
 
@@ -299,5 +319,21 @@ function systemLogOut(){
     }
 
 
+}
+function PostingMessage(){
+    //event.preventDefault();
+
+    let form= document.querySelector(".contactForm");
+    let obj= {
+                    "email": form.cEmail.value,
+                    "firstName": form.fName.value,
+                    "lastName": form.lName.value,
+                    "message": form.message.value,
+                    "mobile": form.cMobile.value,
+                    "userId": admin.userId
+                }
+
+    PostMessage(obj);
+    //console.log(obj);
 }
 

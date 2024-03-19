@@ -1,12 +1,13 @@
 
-// let admin= JSON.parse(localStorage.getItem("blogToken")) || [];
+let admin= JSON.parse(localStorage.getItem("blogToken")) || [];
 
-// if(admin !="" || !admin.isAdministrator){
-//     window.location.href= "index.html";
-// }
+if(admin =="" || !admin.isAdministrator){
+    window.location.href= "index.html";
+}
+
 async function GetAllMessage(key){
     try{
-        let res=await fetch(`http://Feedback/All/${key}`) //this api put login data to database
+        let res=await fetch(`http://localhost:8888/Feedback/All/${key}`) //this api put login data to database
             let data= await  res.json();
             console.log(data);
             if(data != undefined){
@@ -22,7 +23,7 @@ async function GetUserMessage(key){
             let data= await  res.json();
             console.log(data);
             if(data != undefined){
-                display(data);
+                return data;
             }
     }catch(err){
         console.log(err);
@@ -34,7 +35,7 @@ async function GetNonUserMessage(key){
             let data= await  res.json();
             console.log(data);
             if(data != undefined){
-                display(data);
+                return data;
             }
     }catch(err){
         console.log(err);
@@ -57,33 +58,67 @@ async function DeleteMessage(key, id){
     }
 }
 
+GetAllMessage(admin.uuId);
 
 function display(arr){
 
     document.querySelector("tbody").innerHTML="";
 
-    for(let i =0; i <=arr.length-1;i++){
+    arr.forEach(i => {
 
         let row = document.createElement("tr");
 
-        let col1 =document.createElement("td");
-        col1.innerText = arr[i];
+        let name =document.createElement("td");
+        name.innerText = i.firstName+" "+i.lastName;
 
-        let col2 =document.createElement("td");
-        col2.innerText = arr[i].Important;
+        let email =document.createElement("td");
+        email.innerText = i.email;
 
-        if(arr[i].Important=="High"){
-            col2.style.backgroundColor ="red"
-        }else{
-            col2.style.backgroundColor="green";
-        }
-        let col3 =document.createElement("td");
-        col3.innerText="Delete";
-        col3.style.color="red";
-        col3.addEventListener("click",function(event){
-            event.target.remove()
-        })
-        row.append(col1,col2,col3);
+        let mobile =document.createElement("td");
+        mobile.innerText = i.mobile;
+
+        let message =document.createElement("td");
+        message.innerText = i.message;
+
+        // if(arr[i].Important=="High"){
+        //     col2.style.backgroundColor ="red"
+        // }else{
+        //     col2.style.backgroundColor="green";
+        // }
+        // let col3 =document.createElement("td");
+        // col3.innerText="Delete";
+        // col3.style.color="red";
+        // col3.addEventListener("click",function(event){
+        //     event.target.remove()
+        // })
+        row.append(name,email,mobile,message);
         document.querySelector("tbody").append(row); 
-    }
+    });
+
+    let form= document.querySelector("#sortData");
+    form.addEventListener("submit",function(event){
+        event.preventDefault();
+
+        let user= form.user.value;
+        let sbd= form.date.value;
+
+        if(user=="Verified"){
+            let data= GetUserMessage(admin.uuId);
+
+            if(date=="Newest"){
+                display(data)
+            }
+            else{
+                let newData=[];
+                for(let i=data.length-1; i<=0; i--){
+                    newData.push(data[i]);
+                    console.log(data[i]);
+                }
+                console.log(data);
+                display(newData);
+            }
+        }
+
+        console.log(sbd);
+    });
 }

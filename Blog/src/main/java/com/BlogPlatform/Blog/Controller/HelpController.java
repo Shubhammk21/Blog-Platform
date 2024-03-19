@@ -18,7 +18,7 @@ public class HelpController {
     private HelpService hs;
 
     @PostMapping("/Feedback/hm")
-    public ResponseEntity<HelpMessage> createPost(@RequestBody HelpMessage hm) throws HelpMessageException {
+    public ResponseEntity<HelpMessage> createMessagePost(@RequestBody HelpMessage hm) throws HelpMessageException {
 
         return new ResponseEntity<HelpMessage>(hs.saveMessage(hm), HttpStatus.CREATED);
     }
