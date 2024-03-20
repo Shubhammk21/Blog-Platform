@@ -9,7 +9,6 @@ async function GetAllMessage(key){
     try{
         let res=await fetch(`http://localhost:8888/Feedback/All/${key}`) //this api put login data to database
             let data= await  res.json();
-            console.log(data);
             if(data != undefined){
                 display(data);
             }
@@ -17,25 +16,25 @@ async function GetAllMessage(key){
         console.log(err);
     }
 }
-async function GetUserMessage(key){
+async function GetUserMessage(key, order){
     try{
         let res=await fetch(`http://localhost:8888/Feedback/User/${key}`) //this api put login data to database
             let data= await  res.json();
-            console.log(data);
+
             if(data != undefined){
-                return data;
+                display(data, order);
             }
     }catch(err){
         console.log(err);
     }
 }
-async function GetNonUserMessage(key){
+async function GetNonUserMessage(key, order){
     try{
         let res=await fetch(`http://localhost:8888/Feedback/NonUser/${key}`) //this api put login data to database
             let data= await  res.json();
-            console.log(data);
+
             if(data != undefined){
-                return data;
+                display(data, order);
             }
     }catch(err){
         console.log(err);
@@ -60,7 +59,13 @@ async function DeleteMessage(key, id){
 
 GetAllMessage(admin.uuId);
 
-function display(arr){
+function display(arr, order){
+
+    if(order=="desc"){
+        arr.reverse();
+        order="";
+       
+    }
 
     document.querySelector("tbody").innerHTML="";
 
@@ -103,22 +108,23 @@ function display(arr){
         let sbd= form.date.value;
 
         if(user=="Verified"){
-            let data= GetUserMessage(admin.uuId);
 
-            if(date=="Newest"){
-                display(data)
+            if(sbd=="Newest"){
+                GetUserMessage(admin.uuId, "desc");
             }
             else{
-                let newData=[];
-                for(let i=data.length-1; i<=0; i--){
-                    newData.push(data[i]);
-                    console.log(data[i]);
-                }
-                console.log(data);
-                display(newData);
+                GetUserMessage(admin.uuId, "asc");
+              
             }
         }
-
-        console.log(sbd);
+        else if(user=="Non-Verified"){
+            if(sbd=="Newest"){
+                GetNonUserMessage(admin.uuId, "desc");
+            }
+            else{
+                GetNonUserMessage(admin.uuId, "asc");
+              
+            }
+        }
     });
 }
