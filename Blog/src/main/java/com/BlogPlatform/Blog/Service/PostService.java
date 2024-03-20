@@ -1,17 +1,18 @@
 package com.BlogPlatform.Blog.Service;
 
+import com.BlogPlatform.Blog.Exception.LogInException;
 import com.BlogPlatform.Blog.Exception.PostException;
 import com.BlogPlatform.Blog.Model.Post;
 
 import java.util.List;
 
 public interface PostService {
-    public Post createPost(Post post) throws PostException;
+    public Post createPost(Post post, String adminKey) throws PostException, LogInException;
     public Post getPost(int id) throws PostException;
-    public Post updatePost(int id,Post post) throws PostException;
-    public Post deletePost(int id) throws PostException;
-    public int incrementLike(int post_id) throws PostException;
-    public int decrementLike(int post_id) throws PostException;
+    public Post updatePost(int id,Post post, String adminKey) throws PostException, LogInException;
+    public Post deletePost(int id, String adminKey) throws PostException, LogInException;
+    public int incrementLike(int post_id, String userKey) throws PostException,LogInException;
+    public int decrementLike(int post_id, String userKey) throws PostException, LogInException;
     public long totalNumberOfPosts();
     public List<Post> mostLikedPosts();
 

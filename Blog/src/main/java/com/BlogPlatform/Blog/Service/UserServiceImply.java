@@ -1,12 +1,18 @@
 package com.BlogPlatform.Blog.Service;
 
 
+import com.BlogPlatform.Blog.Exception.LogInException;
 import com.BlogPlatform.Blog.Exception.UserException;
 import com.BlogPlatform.Blog.Model.User;
+import com.BlogPlatform.Blog.Model.UserSession;
 import com.BlogPlatform.Blog.Repository.UserRepo;
+import com.BlogPlatform.Blog.Repository.UserSessionRepo;
+import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,13 +21,23 @@ public class UserServiceImply implements UserService{
 
     @Autowired
     private UserRepo ur;
+    @Autowired
+    private UserSessionRepo usr;
 
     @Override
+    @Transactional
     public User createUser(User user) throws UserException {
 
         Optional<User> optionalUser= ur.findByEmail(user.getEmail());
 
-        if (optionalUser.isEmpty()) return ur.save(user);
+        user.setAdministrator(false);
+        user.setCreated_at(LocalDateTime.now());
+        if (optionalUser.isEmpty()) {
+
+            String key= RandomString.make(16);
+            usr.save(new UserSession(user.getMobile(), user.getPassword(), key, LocalDateTime.now(), user.isAdministrator));
+            return ur.save(user);
+        }
         else throw new UserException("(︺︹︶) Already email used (︺︹︶)");
     }
 
@@ -58,8 +74,17 @@ public class UserServiceImply implements UserService{
     }
 
     @Override
-    public long getTotalUsers() {
-        return ur.count();
+    public long getTotalUsers(String adminKey) throws LogInException {
+
+        Optional<UserSession> us= usr.findByUuId(adminKey);
+
+        if (us.isPresent() && us.get().isAdministrator){
+
+            return ur.count();
+
+        }else {
+            throw new LogInException("(︺︹︶) Only admin use this feature (︺︹︶)");
+        }
     }
 
     @Override

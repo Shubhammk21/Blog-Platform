@@ -20,4 +20,5 @@ public class UserSession {
     @Column(unique = true)
     private String uuId;
     private LocalDateTime localDateTime;
+    public boolean isAdministrator;
 }

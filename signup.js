@@ -22,22 +22,23 @@ async function signUp(fname,lname,mobile,email,pass,dob,gender){
                 alert(data.message);
             }else{
                 alert("Sign Up Successfull!!!");
-                return data;
+                localStorage.setItem(data.fname,JSON.stringify(data));
+
             }
     }catch(err){
         console.log(err);
     }
 }
 //console.log("working");
-document.querySelector("#button55").addEventListener("submit",function(event){
+document.querySelector("#button-56").addEventListener("click",function(event){
     console.log("working");
     event.preventDefault();
-    let fname= document.getElementById("fname");
-    let lname= document.getElementById("lname");
-    let email= document.getElementById("email");
-    let mobile= document.getElementById("mobile");
-    let pass= document.getElementById("password");
-    let dob= document.getElementById("dob");
+    let fname= document.getElementById("fname").value;
+    let lname= document.getElementById("lname").value;
+    let email= document.getElementById("email").value;
+    let mobile= document.getElementById("phone").value;
+    let pass= document.getElementById("password").value;
+    let dob= document.getElementById("dob").value;
     var gender;
     let gendata= document.getElementsByName("insex");
     for(let i=0; i<gendata.length; i++){
@@ -45,12 +46,20 @@ document.querySelector("#button55").addEventListener("submit",function(event){
            gender=gendata[i].value;
         }
     }
-   // let profiledat = signUp(fname,lname,mobile,email,pass,dob,gender);
-   // localStorage.setItem(profiledat.fname,JSON.stringify(profiledat))
+    //let profiledat = signUp(fname,lname,mobile,email,pass,dob,gender);
+    
     console.log(fname,lname,mobile,email,pass,dob,gender);
-    // if(phone.value=="" || pass.value=="" ){
-    //     alert("Fill all the Inputs!!");
-    // }
-    //console.log(fname.value+"\n"+lname.value+"\n"+user.value+"\n"+pass.value+"\n"+dob.value+"\n"+gender);
-   // let uuid=doLogin(pass,phone);
-    });
+    signUp(fname,lname,mobile,email,pass,dob,gender)
+});
+
+document.getElementById("loginfun").addEventListener("click",function(event){
+
+     //event.preventDefault();
+     let log= document.getElementById("login");
+     log.style.display="block";
+     
+     let sign= document.getElementById("signup");
+ 
+     sign.style.display= "none"
+ 
+ });

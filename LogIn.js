@@ -60,17 +60,7 @@ document.querySelector("#button-86").addEventListener("click",function(event){
    console.log(phone.value,pass.value);
     let uuid=doLogin(pass,phone);
 });
-document.getElementById("loginfun").addEventListener("click",function(event){
 
-   //    event.preventDefault();
-    let log= document.getElementById("login");
-    log.style.display="block";
-    
-    let sign= document.getElementById("signup");
-
-    sign.style.display= "none"
-
-});
 document.getElementById("logback").addEventListener("click",function(event){
     let log= document.getElementById("login");
 

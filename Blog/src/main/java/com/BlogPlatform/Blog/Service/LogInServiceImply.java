@@ -46,7 +46,7 @@ public class LogInServiceImply implements LogInService{
                 }else{
                     String key= RandomString.make(16);
 
-                    return rDao.save(new UserSession(user.getMobile(), user.getPassword(), key, LocalDateTime.now()));
+                    return rDao.save(new UserSession(user.getMobile(), user.getPassword(), key, LocalDateTime.now(), user.isAdministrator));
                 }
             }else {
                 throw new UserException("Incorrect Password");
@@ -63,7 +63,7 @@ public class LogInServiceImply implements LogInService{
                 }else{
                     String key= RandomString.make(16);
 
-                    return rDao.save(new UserSession(user.getEmail(), user.getPassword(), key, LocalDateTime.now()));
+                    return rDao.save(new UserSession(user.getEmail(), user.getPassword(), key, LocalDateTime.now(), user.isAdministrator));
                 }
             }
         }
