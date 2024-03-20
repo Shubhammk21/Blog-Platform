@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="Css files/MessageSheet.css">
+</head>
+<body>
+    <div style="display:flex; align-items: center;"><a href="Index.html" id="goback"><i class="fa-solid fa-hand-point-left"></i> Go back</a></div>
+    <div>
+        <h1>Message Sheet</h1>
+        <div id="mDiv">
+            <!-- ***** We are using form here  ****  -->
+            <form>
+                <label for="">Create</label><br>
+                <input id="task" type="text" placeholder="Enter Task Name"><br>
+                <label for="">User </label><br>
+                <select id="priority">
+                    <option value="">Select User</option>
+                    <option value="High">Verified</option>
+                    <option value="Low">Non-Verified</option>
+                &gt;
+                </select><input type="submit">
+            </form>
+            <table>
+            <!-- Dont change order of columns -->
+                <thead>
+                    <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Message</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <!-- Append your output to tbody -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+<script src="JS files/MessageSheet.js"></script>
+<script src="https://kit.fontawesome.com/9018df668b.js" crossorigin="anonymous"></script>

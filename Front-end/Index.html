@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog Website</title>
-    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" type="text/css" href="/Front-end/Css files/index.css">
 </head>
 
 <body>
@@ -19,14 +19,17 @@
         <li><a href="#about" onclick="toggleMenuBtn();">About</a></li>
         <li><a href="#post" onclick="toggleMenuBtn();">Post</a></li>
         <li><a href="#contact" onclick="toggleMenuBtn();">Contact</a></li>
-        <li><a href="signUp.html">Login/Sign-up</a></li>
+        <li><a href="Message" onclick="toggleMenuBtn();">Contact</a></li>
+        <li id="liAddPost"><a href="AddPost.html" onclick="toggleMenuBtn();">Add Post</a></li>
+        <li id="signUp"><a href="signUp.html" onclick="toggleMenuBtn();">Login/Sign-up</a></li>
+        <li id="logOut"><a onclick="systemLogOut();">LogOut</a></li>
     </ul>
     
 
 
     <!--banner-->
     <section class="banner" id="home">
-        <img src="pic9.webp" class="cover">
+        <img src="Images/dr-stone-pictures-vupuz0iq3gz67g7h (1).jpg" class="cover">
         <div class="contentBx">
             <h2>The Soul Of The World</h2>
             <h4>A simple Blog Website</h4>
@@ -91,7 +94,7 @@
             </div>
             <div class="content">
                 <div class="imgBx">
-                    <img src="pic3.jpg" class="cover">
+                    <img src="Images/This_Is_Exhilarating.webp" class="cover">
                 </div>
             </div>
         </div>
@@ -198,5 +201,5 @@
 
 </body>
 </html>
-<script src="index.js"></script>
+<script src="/Front-end/JS files/index.js"></script>
 <script src="https://kit.fontawesome.com/9018df668b.js" crossorigin="anonymous"></script>

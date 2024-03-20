@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface UserSessionRepo extends JpaRepository<UserSession, Integer> {
 
     public Optional<UserSession> findByUuId(String key);
-    public Optional<UserSession> findByUserId(String key);
+    public Optional<UserSession> findByUserName(String key);
 
 
 }

@@ -1,6 +1,9 @@
+
+let admin= JSON.parse(localStorage.getItem("blogToken")) || [];
+
 async function Post(obj){
     try{
-        let res=await fetch("http://localhost:8888/posts",{ //this api put login data to database
+        let res=await fetch(`http://localhost:8888/posts/${admin.uuId}`,{ //this api put login data to database
             method:'POST',
             headers:{
                 "Content-Type":"application/json"
@@ -28,7 +31,7 @@ function Posting(){
                     "img": form.link.value,
                     "title": form.title.value,
                     "user": {
-                        "userId": 1
+                        "userId": admin.userId
                       }
                 }
 

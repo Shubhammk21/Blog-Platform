@@ -26,7 +26,7 @@ public class UserServiceImply implements UserService{
 
     @Override
     @Transactional
-    public User createUser(User user) throws UserException {
+    public UserSession createUser(User user) throws UserException {
 
         Optional<User> optionalUser= ur.findByEmail(user.getEmail());
 
@@ -35,8 +35,9 @@ public class UserServiceImply implements UserService{
         if (optionalUser.isEmpty()) {
 
             String key= RandomString.make(16);
-            usr.save(new UserSession(user.getMobile(), user.getPassword(), key, LocalDateTime.now(), user.isAdministrator));
-            return ur.save(user);
+            ur.save(user);
+            return usr.save(new UserSession(user.getUserId(), user.getMobile(), user.getPassword(), key, LocalDateTime.now(), user.isAdministrator));
+
         }
         else throw new UserException("(︺︹︶) Already email used (︺︹︶)");
     }
@@ -54,7 +55,7 @@ public class UserServiceImply implements UserService{
         User user = ur.findById(id)
                 .orElseThrow(() -> new UserException("(︺︹︶) No user their with "+ id+" (︺︹︶)"));
 
-        //user.setName(updatedUser.getName());
+        // user.setName(updatedUser.getName());
         //user.setBioString(updatedUser.getBioString());
 
         return ur.save(updatedUser);

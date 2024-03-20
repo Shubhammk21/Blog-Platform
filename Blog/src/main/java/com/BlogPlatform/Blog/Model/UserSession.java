@@ -15,7 +15,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class UserSession {
     @Id
-    private String userId;
+    private int userId;
+    private String userName;
     private String password;
     @Column(unique = true)
     private String uuId;

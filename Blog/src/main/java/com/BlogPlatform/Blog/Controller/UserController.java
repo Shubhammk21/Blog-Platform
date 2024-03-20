@@ -3,6 +3,7 @@ package com.BlogPlatform.Blog.Controller;
 import com.BlogPlatform.Blog.Exception.LogInException;
 import com.BlogPlatform.Blog.Exception.UserException;
 import com.BlogPlatform.Blog.Model.User;
+import com.BlogPlatform.Blog.Model.UserSession;
 import com.BlogPlatform.Blog.Service.UserService;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,9 @@ public class UserController {
     private UserService us;
 
     @PostMapping("/Users/signUp")
-    public ResponseEntity<User> createUser(@Valid @RequestBody User user) throws UserException {
+    public ResponseEntity<UserSession> createUser(@Valid @RequestBody User user) throws UserException {
 
-        return new ResponseEntity<User>(us.createUser(user), HttpStatus.CREATED);
+        return new ResponseEntity<UserSession>(us.createUser(user), HttpStatus.CREATED);
     }
 
     @GetMapping("/Users/{id}")
