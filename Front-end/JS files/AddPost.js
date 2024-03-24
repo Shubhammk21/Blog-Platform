@@ -1,6 +1,10 @@
 
 let admin= JSON.parse(localStorage.getItem("blogToken")) || [];
 
+if(admin =="" || !admin.isAdministrator){
+    window.location.href= "index.html";
+}
+
 async function Post(obj){
     try{
         let res=await fetch(`http://localhost:8888/posts/${admin.uuId}`,{ //this api put login data to database

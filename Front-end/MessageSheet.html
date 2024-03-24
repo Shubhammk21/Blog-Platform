@@ -12,14 +12,18 @@
         <h1>Message Sheet</h1>
         <div id="mDiv">
             <!-- ***** We are using form here  ****  -->
-            <form>
-                <label for="">Create</label><br>
-                <input id="task" type="text" placeholder="Enter Task Name"><br>
+            <form id="sortData">
+                <label for="">Sort By date</label><br>
+                <select id="date">
+                    <option value="">Date Created</option>
+                    <option value="Newest">Newest</option>
+                    <option value="Oldest">Oldest</option>&gt;
+                </select>
                 <label for="">User </label><br>
-                <select id="priority">
+                <select id="user">
                     <option value="">Select User</option>
-                    <option value="High">Verified</option>
-                    <option value="Low">Non-Verified</option>
+                    <option value="Verified">Verified</option>
+                    <option value="Non-Verified">Non-Verified</option>
                 &gt;
                 </select><input type="submit">
             </form>
